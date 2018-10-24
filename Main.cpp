@@ -1,82 +1,106 @@
-// --------------------------------------
-// Includes
-// --------------------------------------
-// Libraries
+// Library Includes
+#include <SFML/Window.hpp>	
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+#include <string>
+#include <cstdlib>
+#include <ctime>
 
+// Project Includes
+#include "AssetManager.h"
+#include "Wall.h"
+#include "Exit.h"
 
-
+// The main() Function - entry point for our program
 int main()
 {
-	// --------------------------------------
+	// -----------------------------------------------
 	// Game Setup
-	// --------------------------------------
+	// -----------------------------------------------
 
-	// Render Window creation
+	// Window - to draw to the screen
 	sf::RenderWindow gameWindow;
-	gameWindow.create(sf::VideoMode::getDesktopMode(), "Whack A Critter",
-		sf::Style::Titlebar | sf::Style::Close);
+	gameWindow.create(sf::VideoMode::getDesktopMode(), "Button Masher", sf::Style::Titlebar | sf::Style::Close);
 
-	// Timer functionality
+	// Seed our random number generator 
+	srand(time(NULL));
+
+	// Create AssetManager
+	AssetManager assets;
+
+	// Game Clock - to keep track of time passed each frame
 	sf::Clock gameClock;
 
-	// end game setup
-	// --------------------------------------
+	// Game state
+	bool playing = false;
 
+	// Game camera
+	sf::View camera = gameWindow.getDefaultView();
 
-	// --------------------------------------
+	// Create test objects
+	Exit testObject;
+
+	// -----------------------------------------------
 	// Game Loop
-	// --------------------------------------
+	// -----------------------------------------------
 	while (gameWindow.isOpen())
 	{
-		// --------------------------------------
-		// Input
-		// --------------------------------------
-		sf::Event event;
-		while (gameWindow.pollEvent(event))
+		// -----------------------------------------------
+		// Input Section
+		// -----------------------------------------------
+
+		// Check all events since the last frame and process 
+		// each one until there are no more
+		sf::Event gameEvent;
+		while (gameWindow.pollEvent(gameEvent))
 		{
-			if (event.type == sf::Event::Closed)
+			// TODO: Pass event to input objects
+
+
+			// Did the player try to close the window?
+			if (gameEvent.type == sf::Event::Closed)
 			{
+				// If so, call the close function on the window.
 				gameWindow.close();
-			} // End if (closed)
-		} // end event polling loop
+			}
 
-		// end input
-		// --------------------------------------
+		} // End event polling loop
 
-
-		// --------------------------------------
-		// Update
-		// --------------------------------------
+		// -----------------------------------------------
+		// Update Section
+		// -----------------------------------------------
+		// Get the time passed since the last frame and restart our game clock
 		sf::Time frameTime = gameClock.restart();
 
-		// end update
-		// --------------------------------------
+		// TODO: Update all game objects
 
 
+		// -----------------------------------------------
+		// Collision Section
+		// -----------------------------------------------
 
-		// --------------------------------------
-		// Draw
-		// --------------------------------------
+		// TODO: Collision detection
 
+
+		// -----------------------------------------------
+		// Draw Section
+		// -----------------------------------------------
 		// Clear the window to a single colour
-		gameWindow.clear();
+		gameWindow.clear(sf::Color::Black);
 
-		// Draw Everything
+		// Draw game world to the window
+		gameWindow.setView(camera);
+		// TODO: Draw game objects
+		testObject.Draw(gameWindow);
 
+		// Draw UI to the window
+		gameWindow.setView(gameWindow.getDefaultView());
+		// TODO: Draw UI objects
 
-		// Display the window contents to the screen
+		// Display the window contents on the screen
 		gameWindow.display();
 
-		// end draw
-		// --------------------------------------
-
-	} // end of the game while loop
-
-	// end game loop
-	// --------------------------------------
-
-	// exit point for the program
+	} // End of Game Loop
 	return 0;
 
-} // end of the main() function
+} // End of main() Function

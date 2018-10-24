@@ -1,0 +1,10 @@
+Sound effects created with BFXR at bfxr.net. It's a really useful Flash player that lets you create low bit sound effects and export them to WAVs. Very useful for game jams. 
+
+Unlocking sound is by IPaddeh from freesound.org
+Footstep sound is by Monte32 from freesound.org
+Victory music is by Monplaisir from freemusicarchive.org
+
+
+Music is "Bouncy Gypsy Beats" by John Bartmann, a public domain asset downloaded freely on freemusicarchive.org.
+
+Making credits likes these is super boring, but super useful. Let's you keep track of where you found the good stuff and gives you info for putting into your game so that you don't get sued. It's like plugging holes in your boat BEFORE you set sail.

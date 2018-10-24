@@ -126,9 +126,12 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AnimationSystem.cpp" />
     <ClCompile Include="AssetManager.cpp" />
+    <ClCompile Include="Baddy.cpp" />
     <ClCompile Include="Exit.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MovingObject.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="SpriteObject.cpp" />
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
@@ -136,8 +139,11 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AnimationSystem.h" />
     <ClInclude Include="AssetManager.h" />
+    <ClInclude Include="Baddy.h" />
     <ClInclude Include="Exit.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="MovingObject.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="SpriteObject.h" />
     <ClInclude Include="Wall.h" />
   </ItemGroup>

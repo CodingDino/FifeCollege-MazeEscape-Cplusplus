@@ -10,6 +10,8 @@
 #include "AssetManager.h"
 #include "Wall.h"
 #include "Exit.h"
+#include "Player.h"
+#include "Baddy.h"
 
 // The main() Function - entry point for our program
 int main()
@@ -38,7 +40,7 @@ int main()
 	sf::View camera = gameWindow.getDefaultView();
 
 	// Create test objects
-	Exit testObject;
+	Baddy testObject;
 
 	// -----------------------------------------------
 	// Game Loop
@@ -73,6 +75,7 @@ int main()
 		sf::Time frameTime = gameClock.restart();
 
 		// TODO: Update all game objects
+		testObject.Update(frameTime);
 
 
 		// -----------------------------------------------

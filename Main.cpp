@@ -40,7 +40,7 @@ int main()
 	sf::View camera = gameWindow.getDefaultView();
 
 	// Create test objects
-	Baddy testObject;
+	Player testObject;
 
 	// -----------------------------------------------
 	// Game Loop

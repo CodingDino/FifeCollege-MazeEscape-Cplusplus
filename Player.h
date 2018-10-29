@@ -10,4 +10,7 @@ public:
 
 	Player();
 
+	// Overriding Methods
+	void Update(sf::Time _frameTime);
+
 };

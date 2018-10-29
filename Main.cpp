@@ -12,6 +12,7 @@
 #include "Exit.h"
 #include "Player.h"
 #include "Baddy.h"
+#include "Score.h"
 
 // The main() Function - entry point for our program
 int main()
@@ -40,7 +41,7 @@ int main()
 	sf::View camera = gameWindow.getDefaultView();
 
 	// Create test objects
-	Player testObject;
+	Score testObject;
 
 	// -----------------------------------------------
 	// Game Loop

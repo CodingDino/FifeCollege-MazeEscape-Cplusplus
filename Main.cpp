@@ -13,6 +13,7 @@
 #include "Player.h"
 #include "Baddy.h"
 #include "Score.h"
+#include "Coin.h"
 
 // The main() Function - entry point for our program
 int main()
@@ -41,7 +42,8 @@ int main()
 	sf::View camera = gameWindow.getDefaultView();
 
 	// Create test objects
-	Score testObject;
+	Player ourPlayer;
+	Coin ourCoin;
 
 	// -----------------------------------------------
 	// Game Loop
@@ -76,7 +78,10 @@ int main()
 		sf::Time frameTime = gameClock.restart();
 
 		// TODO: Update all game objects
-		testObject.Update(frameTime);
+		if (ourPlayer.IsActive())
+			ourPlayer.Update(frameTime);
+		if (ourCoin.IsActive())
+			ourCoin.Update(frameTime);
 
 
 		// -----------------------------------------------
@@ -84,6 +89,13 @@ int main()
 		// -----------------------------------------------
 
 		// TODO: Collision detection
+		if (ourCoin.IsActive() && ourPlayer.IsActive())
+		{
+			if (ourCoin.GetBounds().intersects(ourPlayer.GetBounds()))
+			{
+				ourCoin.Collide(ourPlayer);
+			}
+		}
 
 
 		// -----------------------------------------------
@@ -94,8 +106,11 @@ int main()
 
 		// Draw game world to the window
 		gameWindow.setView(camera);
-		// TODO: Draw game objects
-		testObject.Draw(gameWindow);
+		// TODO: Draw game object
+		if (ourCoin.IsActive())
+			ourCoin.Draw(gameWindow);
+		if (ourPlayer.IsActive())
+			ourPlayer.Draw(gameWindow);
 
 		// Draw UI to the window
 		gameWindow.setView(gameWindow.getDefaultView());

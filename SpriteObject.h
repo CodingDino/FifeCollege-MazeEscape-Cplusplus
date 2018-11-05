@@ -13,6 +13,7 @@ public:
 
 	// Overriding Methods
 	void Draw(sf::RenderTarget& _target);
+	sf::FloatRect GetBounds();
 
 protected: // This means derived/child classes can access
 

@@ -14,3 +14,10 @@ void SpriteObject::Draw(sf::RenderTarget& _target)
 {
 	_target.draw(m_sprite);
 }
+
+
+
+sf::FloatRect SpriteObject::GetBounds()
+{
+	return m_sprite.getGlobalBounds();
+}

@@ -8,6 +8,7 @@
 
 Player::Player()
 	: MovingObject() // Initialise base class
+	, m_score(0)
 {
 	m_sprite.setTexture(AssetManager::GetTexture("graphics/PlayerWalkDown1.png"));
 }
@@ -41,4 +42,14 @@ void Player::Update(sf::Time _frameTime)
 	// the parent class
 	// This will actually move the character
 	MovingObject::Update(_frameTime);
+}
+
+int Player::GetScore()
+{
+	return m_score;
+}
+
+void Player::ChangeScore(int _changeBy)
+{
+	m_score += _changeBy;
 }

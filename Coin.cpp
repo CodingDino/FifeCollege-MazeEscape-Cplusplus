@@ -9,3 +9,9 @@ Coin::Coin()
 	// TEMP: Position coin
 	m_sprite.setPosition(300.0f, 300.0f);
 }
+
+
+void Coin::OnPickup(Player& _player)
+{
+	_player.ChangeScore(1);
+}

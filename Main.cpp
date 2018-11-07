@@ -44,6 +44,8 @@ int main()
 	// Create test objects
 	Player ourPlayer;
 	Coin ourCoin;
+	Score ourScore;
+	ourScore.SetPlayer(&ourPlayer);
 
 	// -----------------------------------------------
 	// Game Loop
@@ -82,6 +84,8 @@ int main()
 			ourPlayer.Update(frameTime);
 		if (ourCoin.IsActive())
 			ourCoin.Update(frameTime);
+		if (ourScore.IsActive())
+			ourScore.Update(frameTime);
 
 
 		// -----------------------------------------------
@@ -115,6 +119,8 @@ int main()
 		// Draw UI to the window
 		gameWindow.setView(gameWindow.getDefaultView());
 		// TODO: Draw UI objects
+		if (ourScore.IsActive())
+			ourScore.Draw(gameWindow);
 
 		// Display the window contents on the screen
 		gameWindow.display();

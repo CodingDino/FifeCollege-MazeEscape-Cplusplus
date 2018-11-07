@@ -7,4 +7,9 @@ class Coin : public Pickup
 {
 public:
 	Coin();
+
+private:
+
+	// Overriding Methods
+	virtual void OnPickup(Player& _player);
 };

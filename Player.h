@@ -13,4 +13,12 @@ public:
 	// Overriding Methods
 	void Update(sf::Time _frameTime);
 
+	// Public Player Methods
+	int GetScore();
+	void ChangeScore(int _changeBy);
+
+private:
+
+	int m_score;
+
 };

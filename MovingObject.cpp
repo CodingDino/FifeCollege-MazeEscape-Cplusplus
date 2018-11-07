@@ -5,6 +5,7 @@
 MovingObject::MovingObject()
 	: SpriteObject	() // always intiialise base class
 	, m_velocity	(0.0f, 0.0f)
+	, m_previousPosition (0.0f, 0.0f)
 {
 
 }
@@ -13,6 +14,9 @@ void MovingObject::Update(sf::Time _frameTime)
 {
 	// Get the current position
 	sf::Vector2f currentPosition = m_sprite.getPosition();
+
+	// Record our current position as the new previous position
+	m_previousPosition = currentPosition;
 
 	// Calculate the amount moved
 	sf::Vector2f amountMoved = m_velocity * _frameTime.asSeconds();

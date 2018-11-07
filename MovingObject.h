@@ -16,4 +16,5 @@ public:
 protected:
 
 	sf::Vector2f m_velocity; // pixels per second
+	sf::Vector2f m_previousPosition;
 };

@@ -50,6 +50,7 @@ int main()
 	Key ourKey;
 	Exit ourExit;
 	ourExit.SetPlayer(&ourPlayer);
+	Wall ourWall;
 
 	// -----------------------------------------------
 	// Game Loop
@@ -94,6 +95,8 @@ int main()
 			ourKey.Update(frameTime);
 		if (ourExit.IsActive())
 			ourExit.Update(frameTime);
+		if (ourWall.IsActive())
+			ourWall.Update(frameTime);
 
 
 		// -----------------------------------------------
@@ -115,6 +118,13 @@ int main()
 				ourKey.Collide(ourPlayer);
 			}
 		}
+		if (ourWall.IsActive() && ourPlayer.IsActive())
+		{
+			if (ourWall.GetBounds().intersects(ourPlayer.GetBounds()))
+			{
+				ourPlayer.Collide(ourWall);
+			}
+		}
 
 
 		// -----------------------------------------------
@@ -134,6 +144,8 @@ int main()
 			ourKey.Draw(gameWindow);
 		if (ourExit.IsActive())
 			ourExit.Draw(gameWindow);
+		if (ourWall.IsActive())
+			ourWall.Draw(gameWindow);
 
 		// Draw UI to the window
 		gameWindow.setView(gameWindow.getDefaultView());

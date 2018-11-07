@@ -9,6 +9,7 @@
 Player::Player()
 	: MovingObject() // Initialise base class
 	, m_score(0)
+	, m_key(false)
 {
 	m_sprite.setTexture(AssetManager::GetTexture("graphics/PlayerWalkDown1.png"));
 }
@@ -52,4 +53,14 @@ int Player::GetScore()
 void Player::ChangeScore(int _changeBy)
 {
 	m_score += _changeBy;
+}
+
+bool Player::HasKey()
+{
+	return m_key;
+}
+
+void Player::CollectKey()
+{
+	m_key = true;
 }

@@ -21,3 +21,14 @@ sf::FloatRect SpriteObject::GetBounds()
 {
 	return m_sprite.getGlobalBounds();
 }
+
+
+void SpriteObject::SetPosition(sf::Vector2f _position)
+{
+	m_sprite.setPosition(_position);
+}
+
+void SpriteObject::SetPosition(float _x, float _y)
+{
+	m_sprite.setPosition(_x, _y);
+}

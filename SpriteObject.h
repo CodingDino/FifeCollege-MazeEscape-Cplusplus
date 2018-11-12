@@ -14,6 +14,8 @@ public:
 	// Overriding Methods
 	void Draw(sf::RenderTarget& _target);
 	sf::FloatRect GetBounds();
+	virtual void SetPosition(sf::Vector2f _position);
+	virtual void SetPosition(float _x, float _y);
 
 protected: // This means derived/child classes can access
 

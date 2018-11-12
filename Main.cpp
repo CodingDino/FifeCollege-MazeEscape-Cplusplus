@@ -44,13 +44,18 @@ int main()
 
 	// Create test objects
 	Player ourPlayer;
+	ourPlayer.SetPosition(750.0f, 750.0f);
 	Coin ourCoin;
+	ourCoin.SetPosition(100.0f, 100.0f);
 	Score ourScore;
 	ourScore.SetPlayer(&ourPlayer);
 	Key ourKey;
+	ourKey.SetPosition(200.0f, 200.0f);
 	Exit ourExit;
+	ourExit.SetPosition(300.0f, 300.0f);
 	ourExit.SetPlayer(&ourPlayer);
 	Wall ourWall;
+	ourWall.SetPosition(400.0f, 400.0f);
 
 	// -----------------------------------------------
 	// Game Loop
@@ -138,14 +143,14 @@ int main()
 		// TODO: Draw game object
 		if (ourCoin.IsActive())
 			ourCoin.Draw(gameWindow);
-		if (ourPlayer.IsActive())
-			ourPlayer.Draw(gameWindow);
 		if (ourKey.IsActive())
 			ourKey.Draw(gameWindow);
 		if (ourExit.IsActive())
 			ourExit.Draw(gameWindow);
 		if (ourWall.IsActive())
 			ourWall.Draw(gameWindow);
+		if (ourPlayer.IsActive())
+			ourPlayer.Draw(gameWindow);
 
 		// Draw UI to the window
 		gameWindow.setView(gameWindow.getDefaultView());

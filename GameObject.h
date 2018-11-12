@@ -15,6 +15,8 @@ public:
 	virtual void Update(sf::Time _frameTime);
 	virtual sf::FloatRect GetBounds();
 	virtual void Collide(GameObject& _collider);
+	virtual void SetPosition(sf::Vector2f _position);
+	virtual void SetPosition(float _x, float _y);
 	bool IsActive();
 
 protected:

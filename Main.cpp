@@ -42,20 +42,42 @@ int main()
 	// Game camera
 	sf::View camera = gameWindow.getDefaultView();
 
+	// GameObject Lists
+	std::vector<GameObject*> updateList;
+	std::vector<GameObject*> drawListWorld;
+	std::vector<GameObject*> drawListUI;
+
 	// Create test objects
 	Player ourPlayer;
 	ourPlayer.SetPosition(750.0f, 750.0f);
+	updateList.push_back(&ourPlayer);
+	drawListWorld.push_back(&ourPlayer);
+
 	Coin ourCoin;
 	ourCoin.SetPosition(100.0f, 100.0f);
+	updateList.push_back(&ourCoin);
+	drawListWorld.push_back(&ourCoin);
+
 	Score ourScore;
 	ourScore.SetPlayer(&ourPlayer);
+	updateList.push_back(&ourScore);
+	drawListUI.push_back(&ourScore);
+
 	Key ourKey;
 	ourKey.SetPosition(200.0f, 200.0f);
+	updateList.push_back(&ourKey);
+	drawListWorld.push_back(&ourKey);
+
 	Exit ourExit;
 	ourExit.SetPosition(300.0f, 300.0f);
 	ourExit.SetPlayer(&ourPlayer);
+	updateList.push_back(&ourExit);
+	drawListWorld.push_back(&ourExit);
+
 	Wall ourWall;
 	ourWall.SetPosition(400.0f, 400.0f);
+	updateList.push_back(&ourWall);
+	drawListWorld.push_back(&ourWall);
 
 	// -----------------------------------------------
 	// Game Loop
@@ -89,19 +111,12 @@ int main()
 		// Get the time passed since the last frame and restart our game clock
 		sf::Time frameTime = gameClock.restart();
 
-		// TODO: Update all game objects
-		if (ourPlayer.IsActive())
-			ourPlayer.Update(frameTime);
-		if (ourCoin.IsActive())
-			ourCoin.Update(frameTime);
-		if (ourScore.IsActive())
-			ourScore.Update(frameTime);
-		if (ourKey.IsActive())
-			ourKey.Update(frameTime);
-		if (ourExit.IsActive())
-			ourExit.Update(frameTime);
-		if (ourWall.IsActive())
-			ourWall.Update(frameTime);
+		// Update all game objects
+		for (int i = 0; i < updateList.size(); ++i)
+		{
+			if (updateList[i]->IsActive())
+				updateList[i]->Update(frameTime);
+		}
 
 
 		// -----------------------------------------------
@@ -140,23 +155,21 @@ int main()
 
 		// Draw game world to the window
 		gameWindow.setView(camera);
-		// TODO: Draw game object
-		if (ourCoin.IsActive())
-			ourCoin.Draw(gameWindow);
-		if (ourKey.IsActive())
-			ourKey.Draw(gameWindow);
-		if (ourExit.IsActive())
-			ourExit.Draw(gameWindow);
-		if (ourWall.IsActive())
-			ourWall.Draw(gameWindow);
-		if (ourPlayer.IsActive())
-			ourPlayer.Draw(gameWindow);
+		// Draw game objects
+		for (int i = 0; i < drawListWorld.size(); ++i)
+		{
+			if (drawListWorld[i]->IsActive())
+				drawListWorld[i]->Draw(gameWindow);
+		}
 
 		// Draw UI to the window
 		gameWindow.setView(gameWindow.getDefaultView());
-		// TODO: Draw UI objects
-		if (ourScore.IsActive())
-			ourScore.Draw(gameWindow);
+		// Draw UI objects
+		for (int i = 0; i < drawListUI.size(); ++i)
+		{
+			if (drawListUI[i]->IsActive())
+				drawListUI[i]->Draw(gameWindow);
+		}
 
 		// Display the window contents on the screen
 		gameWindow.display();

@@ -47,6 +47,8 @@ int main()
 	std::vector<GameObject*> drawListWorld;
 	std::vector<GameObject*> drawListUI;
 
+	std::vector<std::pair<GameObject*,GameObject*> > collisionList;
+
 	// Create test objects
 	Player ourPlayer;
 	ourPlayer.SetPosition(750.0f, 750.0f);
@@ -57,6 +59,7 @@ int main()
 	ourCoin.SetPosition(100.0f, 100.0f);
 	updateList.push_back(&ourCoin);
 	drawListWorld.push_back(&ourCoin);
+	collisionList.push_back(std::make_pair(&ourCoin, &ourPlayer));
 
 	Score ourScore;
 	ourScore.SetPlayer(&ourPlayer);
@@ -67,6 +70,7 @@ int main()
 	ourKey.SetPosition(200.0f, 200.0f);
 	updateList.push_back(&ourKey);
 	drawListWorld.push_back(&ourKey);
+	collisionList.push_back(std::make_pair(&ourKey, &ourPlayer));
 
 	Exit ourExit;
 	ourExit.SetPosition(300.0f, 300.0f);
@@ -78,6 +82,7 @@ int main()
 	ourWall.SetPosition(400.0f, 400.0f);
 	updateList.push_back(&ourWall);
 	drawListWorld.push_back(&ourWall);
+	collisionList.push_back(std::make_pair(&ourPlayer, &ourWall));
 
 	// -----------------------------------------------
 	// Game Loop
@@ -123,26 +128,18 @@ int main()
 		// Collision Section
 		// -----------------------------------------------
 
-		// TODO: Collision detection
-		if (ourCoin.IsActive() && ourPlayer.IsActive())
+		// Collision detection
+		for (int i = 0; i < collisionList.size(); ++i)
 		{
-			if (ourCoin.GetBounds().intersects(ourPlayer.GetBounds()))
+			GameObject* handler = collisionList[i].first;
+			GameObject* collider = collisionList[i].second;
+
+			if (handler->IsActive() && collider->IsActive())
 			{
-				ourCoin.Collide(ourPlayer);
-			}
-		}
-		if (ourKey.IsActive() && ourPlayer.IsActive())
-		{
-			if (ourKey.GetBounds().intersects(ourPlayer.GetBounds()))
-			{
-				ourKey.Collide(ourPlayer);
-			}
-		}
-		if (ourWall.IsActive() && ourPlayer.IsActive())
-		{
-			if (ourWall.GetBounds().intersects(ourPlayer.GetBounds()))
-			{
-				ourPlayer.Collide(ourWall);
+				if (handler->GetBounds().intersects(collider->GetBounds()))
+				{
+					handler->Collide(*collider);
+				}
 			}
 		}
 

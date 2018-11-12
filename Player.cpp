@@ -11,8 +11,24 @@ Player::Player()
 	: MovingObject() // Initialise base class
 	, m_score(0)
 	, m_key(false)
+	, m_animationSystem()
 {
 	m_sprite.setTexture(AssetManager::GetTexture("graphics/PlayerWalkDown1.png"));
+
+	// Set up the animation
+	m_animationSystem.SetSprite(m_sprite);
+
+	// Create indvidual animations
+	Animation& standDown = m_animationSystem.CreateAnimation("standDown");
+	standDown.AddFrame(AssetManager::GetTexture("graphics/PlayerWalkDown1.png"));
+
+	Animation& runDown = m_animationSystem.CreateAnimation("runDown");
+	runDown.AddFrame(AssetManager::GetTexture("graphics/PlayerWalkDown2.png"));
+	runDown.AddFrame(AssetManager::GetTexture("graphics/PlayerWalkDown3.png"));
+	runDown.SetPlayBackSpeed(10);
+	runDown.SetLoop(true);
+
+	m_animationSystem.Play("runDown");
 }
 
 void Player::Update(sf::Time _frameTime)
@@ -44,6 +60,9 @@ void Player::Update(sf::Time _frameTime)
 	// the parent class
 	// This will actually move the character
 	MovingObject::Update(_frameTime);
+
+	// Process animations
+	m_animationSystem.Update(_frameTime);
 }
 
 void Player::Collide(GameObject& _collider)

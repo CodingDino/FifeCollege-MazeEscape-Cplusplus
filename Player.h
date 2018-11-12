@@ -2,6 +2,7 @@
 
 // Project Includes
 #include "MovingObject.h"
+#include "AnimationSystem.h"
 
 class Player : public MovingObject
 {
@@ -24,4 +25,5 @@ private:
 
 	int m_score;
 	bool m_key;
+	AnimationSystem m_animationSystem;
 };

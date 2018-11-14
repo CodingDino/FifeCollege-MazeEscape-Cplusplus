@@ -29,7 +29,8 @@ void Level::Draw(sf::RenderTarget& _target)
 {
 	// Create and update
 	sf::View camera = _target.getDefaultView();
-	// TODO: Follow player with camera
+	// Follow player with camera
+	camera.setCenter(m_player->GetPosition());
 
 	// Draw game world to the window
 	_target.setView(camera);

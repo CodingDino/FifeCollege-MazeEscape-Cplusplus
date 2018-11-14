@@ -41,3 +41,8 @@ bool GameObject::IsActive()
 {
 	return m_active;
 }
+
+sf::Vector2f GameObject::GetPosition()
+{
+	return sf::Vector2f();
+}

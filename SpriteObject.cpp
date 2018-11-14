@@ -32,3 +32,8 @@ void SpriteObject::SetPosition(float _x, float _y)
 {
 	m_sprite.setPosition(_x, _y);
 }
+
+sf::Vector2f SpriteObject::GetPosition()
+{
+	return m_sprite.getPosition();
+}

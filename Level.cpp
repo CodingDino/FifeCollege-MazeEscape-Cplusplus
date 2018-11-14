@@ -7,9 +7,11 @@
 #include "Score.h"
 #include "Coin.h"
 #include "Key.h"
+#include "Hazard.h"
 
 Level::Level()
-	: m_player(nullptr)
+	: m_currentLevel(0)
+	, m_player(nullptr)
 	, m_updateList()
 	, m_drawListWorld()
 	, m_drawListUI()
@@ -90,10 +92,14 @@ void Level::LoadLevel(int _levelToLoad)
 	m_collisionList.clear();
 
 
+	// Set the current level
+	m_currentLevel = _levelToLoad;
+
 
 	// Set up the new level
 	Player* ourPlayer = new Player();
 	ourPlayer->SetPosition(750.0f, 750.0f);
+	ourPlayer->SetLevel(this);
 	m_updateList.push_back(ourPlayer);
 	m_drawListWorld.push_back(ourPlayer);
 	m_player = ourPlayer;
@@ -127,4 +133,15 @@ void Level::LoadLevel(int _levelToLoad)
 	m_drawListWorld.push_back(ourWall);
 	m_collisionList.push_back(std::make_pair(ourPlayer, ourWall));
 
+	Hazard* ourHazard = new Hazard();
+	ourHazard->SetPosition(200.0f, 900.0f);
+	m_updateList.push_back(ourHazard);
+	m_drawListWorld.push_back(ourHazard);
+	m_collisionList.push_back(std::make_pair(ourHazard, ourPlayer));
+
+}
+
+void Level::ReloadLevel()
+{
+	LoadLevel(m_currentLevel);
 }

@@ -12,6 +12,7 @@ Player::Player()
 	, m_score(0)
 	, m_key(false)
 	, m_animationSystem()
+	, m_level(nullptr)
 {
 	m_sprite.setTexture(AssetManager::GetTexture("graphics/PlayerWalkDown1.png"));
 
@@ -108,4 +109,16 @@ bool Player::HasKey()
 void Player::CollectKey()
 {
 	m_key = true;
+}
+
+void Player::Kill()
+{
+	// Reload current level
+	if (m_level != nullptr)
+		m_level->ReloadLevel();
+}
+
+void Player::SetLevel(Level* _newLevel)
+{
+	m_level = _newLevel;
 }

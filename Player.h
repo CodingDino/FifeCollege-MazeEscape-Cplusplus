@@ -3,6 +3,7 @@
 // Project Includes
 #include "MovingObject.h"
 #include "AnimationSystem.h"
+#include "Level.h"
 
 class Player : public MovingObject
 {
@@ -20,10 +21,13 @@ public:
 	void ChangeScore(int _changeBy);
 	bool HasKey();
 	void CollectKey();
+	void Kill();
+	void SetLevel(Level* _newLevel);
 
 private:
 
 	int m_score;
 	bool m_key;
 	AnimationSystem m_animationSystem;
+	Level* m_level;
 };

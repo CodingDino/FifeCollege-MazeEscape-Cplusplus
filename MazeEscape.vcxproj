@@ -130,6 +130,7 @@
     <ClCompile Include="Coin.cpp" />
     <ClCompile Include="Exit.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Hazard.cpp" />
     <ClCompile Include="Key.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -149,6 +150,7 @@
     <ClInclude Include="Coin.h" />
     <ClInclude Include="Exit.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Hazard.h" />
     <ClInclude Include="Key.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="MovingObject.h" />

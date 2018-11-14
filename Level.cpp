@@ -9,6 +9,10 @@
 #include "Key.h"
 #include "Hazard.h"
 
+// Library Includes
+#include <iostream>
+#include <fstream>
+
 Level::Level()
 	: m_currentLevel(0)
 	, m_player(nullptr)
@@ -97,48 +101,115 @@ void Level::LoadLevel(int _levelToLoad)
 
 
 	// Set up the new level
+
+	// Open our file for reading
+	std::ifstream inFile;
+	std::string fileName = "levels/Level" + std::to_string(m_currentLevel) + ".txt";
+	inFile.open(fileName);
+
+	// Make sure the file was opened
+	if (!inFile) {
+		std::cerr << "Unable to open file " + fileName;
+		exit(1); // Call system to stop program with error
+	}
+
+	// Set the starting x and y coordinates used to position level objects
+	float x = 0.0f;
+	float y = 0.0f;
+
+	// Define the spacing we will use for our grid
+	const float X_SPACE = 100.0f;
+	const float Y_SPACE = 100.0f;
+
+	// Create the player first as other objects will need to reference it
 	Player* ourPlayer = new Player();
-	ourPlayer->SetPosition(750.0f, 750.0f);
-	ourPlayer->SetLevel(this);
-	m_updateList.push_back(ourPlayer);
-	m_drawListWorld.push_back(ourPlayer);
 	m_player = ourPlayer;
 
-	Coin* ourCoin = new Coin();
-	ourCoin->SetPosition(100.0f, 100.0f);
-	m_updateList.push_back(ourCoin);
-	m_drawListWorld.push_back(ourCoin);
-	m_collisionList.push_back(std::make_pair(ourCoin, ourPlayer));
+	// Read each character one by one from the file...
+	char ch;
+	// Each time, try to read the next character
+	// If successful, execute body of loop
+	// the "noskipws" means our input from the file will include 
+	// the white space (spaces and new lines)
+	while (inFile >> std::noskipws >> ch)
+	{
+		// Perform actions based on what character was read in
 
+		if (ch == ' ')
+		{
+			x += X_SPACE;
+		}
+		else if (ch == '\n')
+		{
+			y += Y_SPACE;
+			x = 0;
+		}
+		else if (ch == 'P')
+		{
+			ourPlayer->SetPosition(x, y);
+			ourPlayer->SetLevel(this);
+			m_updateList.push_back(ourPlayer);
+			m_drawListWorld.push_back(ourPlayer);
+		}
+		else if (ch == 'W')
+		{
+			Wall* ourWall = new Wall();
+			ourWall->SetPosition(x, y);
+			m_updateList.push_back(ourWall);
+			m_drawListWorld.push_back(ourWall);
+			m_collisionList.push_back(std::make_pair(ourPlayer, ourWall));
+		}
+		else if (ch == 'C')
+		{
+			Coin* ourCoin = new Coin();
+			ourCoin->SetPosition(x, y);
+			m_updateList.push_back(ourCoin);
+			m_drawListWorld.push_back(ourCoin);
+			m_collisionList.push_back(std::make_pair(ourCoin, ourPlayer));
+		}
+		else if (ch == 'K')
+		{
+			Key* ourKey = new Key();
+			ourKey->SetPosition(x, y);
+			m_updateList.push_back(ourKey);
+			m_drawListWorld.push_back(ourKey);
+			m_collisionList.push_back(std::make_pair(ourKey, ourPlayer));
+		}
+		else if (ch == 'E')
+		{
+			Exit* ourExit = new Exit();
+			ourExit->SetPosition(x, y);
+			ourExit->SetPlayer(ourPlayer);
+			m_updateList.push_back(ourExit);
+			m_drawListWorld.push_back(ourExit);
+			m_collisionList.push_back(std::make_pair(ourExit, ourPlayer));
+		}
+		else if (ch == 'H')
+		{
+			Hazard* ourHazard = new Hazard();
+			ourHazard->SetPosition(x, y);
+			m_updateList.push_back(ourHazard);
+			m_drawListWorld.push_back(ourHazard);
+			m_collisionList.push_back(std::make_pair(ourHazard, ourPlayer));
+		}
+		else if (ch == '-')
+		{
+			// Do nothing - empty space
+		}
+		else
+		{
+			std::cerr << "Unrecognised character in level file: " << ch;
+		}
+	}
+
+	// Close the file now that we are done with it
+	inFile.close();
+
+	// Score - position not dependant on level
 	Score* ourScore = new Score();
 	ourScore->SetPlayer(ourPlayer);
 	m_updateList.push_back(ourScore);
 	m_drawListUI.push_back(ourScore);
-
-	Key* ourKey = new Key();
-	ourKey->SetPosition(200.0f, 200.0f);
-	m_updateList.push_back(ourKey);
-	m_drawListWorld.push_back(ourKey);
-	m_collisionList.push_back(std::make_pair(ourKey, ourPlayer));
-
-	Exit* ourExit = new Exit();
-	ourExit->SetPosition(300.0f, 300.0f);
-	ourExit->SetPlayer(ourPlayer);
-	m_updateList.push_back(ourExit);
-	m_drawListWorld.push_back(ourExit);
-	m_collisionList.push_back(std::make_pair(ourExit, ourPlayer));
-
-	Wall* ourWall = new Wall();
-	ourWall->SetPosition(400.0f, 400.0f);
-	m_updateList.push_back(ourWall);
-	m_drawListWorld.push_back(ourWall);
-	m_collisionList.push_back(std::make_pair(ourPlayer, ourWall));
-
-	Hazard* ourHazard = new Hazard();
-	ourHazard->SetPosition(200.0f, 900.0f);
-	m_updateList.push_back(ourHazard);
-	m_drawListWorld.push_back(ourHazard);
-	m_collisionList.push_back(std::make_pair(ourHazard, ourPlayer));
 
 }
 

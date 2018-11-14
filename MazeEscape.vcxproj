@@ -161,6 +161,11 @@
     <ClInclude Include="TextObject.h" />
     <ClInclude Include="Wall.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="levels\Level1.txt" />
+    <Text Include="levels\Level2.txt" />
+    <Text Include="levels\Level3.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

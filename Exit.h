@@ -10,7 +10,8 @@ public:
 	Exit();
 
 	// Overriding Methods
-	virtual void Update(sf::Time _frameTime);
+	void Update(sf::Time _frameTime);
+	void Collide(GameObject& _collider);
 
 	// Public Score Methods
 	void SetPlayer(Player* _player);

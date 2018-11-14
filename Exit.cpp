@@ -22,6 +22,27 @@ void Exit::Update(sf::Time _frameTime)
 	}
 }
 
+
+void Exit::Collide(GameObject& _collider)
+{
+	// Only do something if the thing
+	// we touched was the player
+	Player* castPlayer = dynamic_cast<Player*>(&_collider);
+
+	// Only do the thing if player is not null
+	if (castPlayer != nullptr)
+	{
+		// We were touched by the player
+
+		// if the player has the key...
+		if (castPlayer->HasKey())
+		{
+			// Load Next Level
+			castPlayer->AdvanceLevel();
+		}
+	}
+}
+
 void Exit::SetPlayer(Player* _player)
 {
 	m_player = _player;

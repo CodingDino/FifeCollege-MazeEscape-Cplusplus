@@ -126,6 +126,7 @@ void Level::LoadLevel(int _levelToLoad)
 	ourExit->SetPlayer(ourPlayer);
 	m_updateList.push_back(ourExit);
 	m_drawListWorld.push_back(ourExit);
+	m_collisionList.push_back(std::make_pair(ourExit, ourPlayer));
 
 	Wall* ourWall = new Wall();
 	ourWall->SetPosition(400.0f, 400.0f);
@@ -144,4 +145,9 @@ void Level::LoadLevel(int _levelToLoad)
 void Level::ReloadLevel()
 {
 	LoadLevel(m_currentLevel);
+}
+
+void Level::LoadNextLevel()
+{
+	LoadLevel(m_currentLevel + 1);
 }

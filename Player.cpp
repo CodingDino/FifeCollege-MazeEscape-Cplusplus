@@ -122,3 +122,10 @@ void Player::SetLevel(Level* _newLevel)
 {
 	m_level = _newLevel;
 }
+
+void Player::AdvanceLevel()
+{
+	// Advance to next level
+	if (m_level != nullptr)
+		m_level->LoadNextLevel();
+}

@@ -23,6 +23,7 @@ public:
 	void CollectKey();
 	void Kill();
 	void SetLevel(Level* _newLevel);
+	void AdvanceLevel();
 
 private:
 

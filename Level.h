@@ -15,6 +15,7 @@ public:
 
 	void LoadLevel(int _levelToLoad);
 	void ReloadLevel();
+	void LoadNextLevel();
 
 private: 
 

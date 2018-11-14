@@ -131,6 +131,7 @@
     <ClCompile Include="Exit.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Key.cpp" />
+    <ClCompile Include="Level.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MovingObject.cpp" />
     <ClCompile Include="Pickup.cpp" />
@@ -149,6 +150,7 @@
     <ClInclude Include="Exit.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Key.h" />
+    <ClInclude Include="Level.h" />
     <ClInclude Include="MovingObject.h" />
     <ClInclude Include="Pickup.h" />
     <ClInclude Include="Player.h" />
